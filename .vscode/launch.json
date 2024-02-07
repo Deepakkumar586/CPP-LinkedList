@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "c:/Users/Deepak kumar/Desktop/Cpp/LinkedList",
-      "program": "c:/Users/Deepak kumar/Desktop/Cpp/LinkedList/build/Debug/outDebug",
+      "cwd": "c:/Users/Deepak kumar/Desktop/Cpp",
+      "program": "c:/Users/Deepak kumar/Desktop/Cpp/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [

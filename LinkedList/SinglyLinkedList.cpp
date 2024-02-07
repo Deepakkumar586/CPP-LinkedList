@@ -158,12 +158,14 @@ void deleteNode(int position, Node *&head, Node *&tail)
 }
 
 /*        LENGTH OF LINKED LIST       */
-int getLength(Node*head){
-    int len=0;
-    Node * temp = head;
-    while(temp!=NULL){
+int getLength(Node *head)
+{
+    int len = 0;
+    Node *temp = head;
+    while (temp != NULL)
+    {
         len++;
-        temp=  temp->next;
+        temp = temp->next;
     }
     return len;
 }
@@ -190,13 +192,13 @@ int main()
 
     cout << "head " << head->data << endl;
     cout << "tail " << tail->data << endl;
-    cout<<getLength(head)<<endl;
+    cout << getLength(head) << endl;
 
     deleteNode(2, head, tail);
     print(head);
     cout << "head " << head->data << endl;
     cout << "tail " << tail->data << endl;
 
-    cout<<getLength(head)<<endl;
+    cout << getLength(head) << endl;
     return 0;
 }
