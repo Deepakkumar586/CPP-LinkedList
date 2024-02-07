@@ -50,7 +50,7 @@ void insertNode(Node *&tail, int element, int d)
             curr = curr->next;
         }
 
-        //  element found-->> curr node is present element wala node
+        //  element found-->> curr node is represent element wala node
 
         Node *temp = new Node(d);
         temp->next = curr->next;
