@@ -1,4 +1,6 @@
 #include <iostream>
+#include<map>
+#include <bits/stdc++.h>
 using namespace std;
 
 class Node
@@ -138,6 +140,28 @@ bool isCircularList(Node *tail)
     return false;
 }
 
+// detect Loop
+bool detectLoop(Node*head){
+    if(head==NULL)
+        return false;
+    
+    map<Node*, bool> visited;
+    
+    Node* temp = head;
+
+    while(temp!=NULL){
+
+        // cycle is present
+        if(visited[temp]==true){
+            return true;
+        }
+        visited[temp] = true;
+        temp = temp->next;
+    }
+    return false;
+
+}
+
 int main()
 {
     Node *tail = NULL;
@@ -176,6 +200,13 @@ int main()
     else
     {
         cout << "Linked List is  NOT Circular" << endl;
+    }
+
+    if(detectLoop(tail)){
+        cout<<"cycle is present"<<endl;
+    }
+    else{
+        cout<<"cycle is not present"<<endl;
     }
     return 0;
 }

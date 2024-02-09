@@ -30,6 +30,8 @@
 /* How to Insert New nOde  as well as Delete Node*/
 
 #include <iostream>
+#include <bits/stdc++.h>
+
 using namespace std;
 
 class Node
@@ -169,6 +171,28 @@ int getLength(Node *head)
     }
     return len;
 }
+// detect Loop
+bool detectLoop(Node*head){
+    if(head==NULL)
+        return false;
+    
+    map<Node*, bool> visited;
+    
+    Node* temp = head;
+
+    while(temp!=NULL){
+
+        // cycle is present
+        if(visited[temp]==true){
+            cout<<"Present Element :"<<temp->data<<endl;
+            return true;
+        }
+        visited[temp] = true;
+        temp = temp->next;
+    }
+    return false;
+
+}
 int main()
 {
     // Created New Node
@@ -179,26 +203,40 @@ int main()
     // head pointed to node1
     Node *head = node1;
     Node *tail = node1;
-    print(head);
+    // print(head);
 
     insertAtTail(tail, 12);
-    print(head);
+    // print(head);
 
     insertAtTail(tail, 15);
-    print(head);
+    // print(head);
 
-    insertAtPosition(head, tail, 4, 22);
-    print(head);
 
+
+    // detect loop 
+    tail->next = head->next;
+    if(detectLoop(head)){
+        cout<<"cycle is present"<<endl;
+    }
+    else{
+        cout<<"cycle is not present"<<endl;
+    }
+
+    // insertAtPosition(head, tail, 4, 22);
+    // print(head);
+
+    /*
     cout << "head " << head->data << endl;
     cout << "tail " << tail->data << endl;
-    cout << getLength(head) << endl;
+    cout << getLength(head) << endl;*/
 
-    deleteNode(2, head, tail);
-    print(head);
+    /*deleteNode(2, head, tail);
+    // print(head);
     cout << "head " << head->data << endl;
     cout << "tail " << tail->data << endl;
 
-    cout << getLength(head) << endl;
+    cout << getLength(head) << endl;*/
+
+
     return 0;
 }
