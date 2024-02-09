@@ -172,26 +172,92 @@ int getLength(Node *head)
     return len;
 }
 // detect Loop
-bool detectLoop(Node*head){
-    if(head==NULL)
+bool detectLoop(Node *head)
+{
+    if (head == NULL)
         return false;
-    
-    map<Node*, bool> visited;
-    
-    Node* temp = head;
 
-    while(temp!=NULL){
+    map<Node *, bool> visited;
+
+    Node *temp = head;
+
+    while (temp != NULL)
+    {
 
         // cycle is present
-        if(visited[temp]==true){
-            cout<<"Present Element :"<<temp->data<<endl;
+        if (visited[temp] == true)
+        {
+            cout << "Present Element :" << temp->data << endl;
             return true;
         }
         visited[temp] = true;
         temp = temp->next;
     }
     return false;
+}
 
+// floyd Detect Loop
+Node *floydLoop(Node *head)
+{
+    if (head == NULL)
+    {
+        return NULL;
+    }
+    Node *slow = head;
+    Node *fast = head;
+    while (slow != NULL && fast != NULL)
+    {
+        fast = fast->next;
+        if (fast != NULL)
+        {
+            fast = fast->next;
+        }
+        slow = slow->next;
+        if (slow == fast)
+        {
+            cout << "Present Element :" << slow->data << endl;
+            return slow;
+        }
+    }
+    return NULL;
+}
+
+// starting Node of Loop
+Node *getStartingNode(Node *head)
+{
+    // if list is empty
+    if (head == NULL)
+    {
+        return NULL;
+    }
+
+    Node *intersection = floydLoop(head);
+    Node *slow = head;
+    while (slow != intersection)
+    {
+        slow = slow->next;
+        intersection = intersection->next;
+    }
+    return slow;
+}
+
+// Remove cycle
+void removeCycle(Node *head)
+{
+
+    // empty list
+    if (head == NULL)
+    {
+        return;
+    }
+
+    Node *startofLoop = getStartingNode(head);
+    Node *temp = startofLoop;
+    while (temp->next != startofLoop)
+    {
+        temp = temp->next;
+    }
+    temp->next = NULL;
 }
 int main()
 {
@@ -211,16 +277,35 @@ int main()
     insertAtTail(tail, 15);
     // print(head);
 
+    insertAtTail(tail, 22);
 
+    // detect loop
+    // tail->next = head->next;
+    // if(detectLoop(head)){
+    //     cout<<"cycle is present"<<endl;
+    // }
+    // else{
+    //     cout<<"cycle is not present"<<endl;
+    // }
 
-    // detect loop 
+    // use floyd cycle detection Alogorithm
     tail->next = head->next;
-    if(detectLoop(head)){
-        cout<<"cycle is present"<<endl;
+    if (floydLoop(head) != NULL)
+    {
+        cout << "cycle is present" << endl;
     }
-    else{
-        cout<<"cycle is not present"<<endl;
+    else
+    {
+        cout << "cycle is not present" << endl;
     }
+
+    // Start Point Of Node FInd
+    Node *startPoint = getStartingNode(head);
+    cout << "Starting Node at : " << startPoint->data << endl;
+
+    // Remove Loop/Cycle
+    removeCycle(head);
+    print(head);
 
     // insertAtPosition(head, tail, 4, 22);
     // print(head);
@@ -236,7 +321,6 @@ int main()
     cout << "tail " << tail->data << endl;
 
     cout << getLength(head) << endl;*/
-
 
     return 0;
 }

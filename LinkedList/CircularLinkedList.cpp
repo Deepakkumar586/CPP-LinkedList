@@ -1,5 +1,5 @@
 #include <iostream>
-#include<map>
+#include <map>
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -141,25 +141,27 @@ bool isCircularList(Node *tail)
 }
 
 // detect Loop
-bool detectLoop(Node*head){
-    if(head==NULL)
+bool detectLoop(Node *head)
+{
+    if (head == NULL)
         return false;
-    
-    map<Node*, bool> visited;
-    
-    Node* temp = head;
 
-    while(temp!=NULL){
+    map<Node *, bool> visited;
+
+    Node *temp = head;
+
+    while (temp != NULL)
+    {
 
         // cycle is present
-        if(visited[temp]==true){
+        if (visited[temp] == true)
+        {
             return true;
         }
         visited[temp] = true;
         temp = temp->next;
     }
     return false;
-
 }
 
 int main()
@@ -202,11 +204,13 @@ int main()
         cout << "Linked List is  NOT Circular" << endl;
     }
 
-    if(detectLoop(tail)){
-        cout<<"cycle is present"<<endl;
+    if (detectLoop(tail))
+    {
+        cout << "cycle is present" << endl;
     }
-    else{
-        cout<<"cycle is not present"<<endl;
+    else
+    {
+        cout << "cycle is not present" << endl;
     }
     return 0;
 }
